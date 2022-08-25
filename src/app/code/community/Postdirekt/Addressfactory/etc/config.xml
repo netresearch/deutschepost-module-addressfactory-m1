@@ -71,6 +71,7 @@
             <postdirekt_addressfactory>
                 <api_password backend_model="adminhtml/system_config_backend_encrypted"/>
                 <configuration_name>Standard</configuration_name>
+                <log_level>3</log_level>
             </postdirekt_addressfactory>
         </customer>
     </default>

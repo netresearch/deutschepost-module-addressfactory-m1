@@ -19,26 +19,30 @@ class Postdirekt_Addressfactory_Model_Analysis_Status extends Mage_Core_Model_Ab
 
     /**
      * @param int $orderId
+     * @return Postdirekt_Addressfactory_Model_Analysis_Status
      */
-    public function setOrderId(int $orderId)
+    public function setOrderId(int $orderId): self
     {
         $this->setData(self::ORDER_ID, $orderId);
+        return $this;
     }
 
     /**
      * @return int
      */
-    public function getOrderId():int
+    public function getOrderId(): int
     {
         return (int) $this->getData(self::ORDER_ID);
     }
 
     /**
      * @param string $status
+     * @return Postdirekt_Addressfactory_Model_Analysis_Status
      */
-    public function setStatus(string $status)
+    public function setStatus(string $status): self
     {
         $this->setData(self::STATUS, $status);
+        return $this;
     }
 
     /**

@@ -27,9 +27,8 @@ class Postdirekt_Addressfactory_Model_Adminhtml_System_Config_Source_Loglevel
     public function toArray(): array
     {
         return array(
-            Zend_Log::ERR   => Mage::helper('postdirekt_addressfactory/data')->__('Error'),
-            Zend_Log::WARN  => Mage::helper('postdirekt_addressfactory/data')->__('Warning'),
-            Zend_Log::DEBUG => Mage::helper('postdirekt_addressfactory/data')->__('Debug')
+            Zend_Log::INFO  => Mage::helper('postdirekt_addressfactory/data')->__('Everything'),
+            Zend_Log::ERR   => Mage::helper('postdirekt_addressfactory/data')->__('Errors'),
         );
     }
 }

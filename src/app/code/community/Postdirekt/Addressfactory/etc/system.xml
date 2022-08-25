@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * See LICENSE.md for license details.
+ */
+-->
+<config>
+    <sections>
+        <customer>
+            <groups>
+                <postdirekt_addressfactory translate="label" module="postdirekt_addressfactory">
+                    <label>Deutsche Post Direkt ADDRESSFACTORY</label>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <header>
+                            <frontend_model>postdirekt_addressfactory/adminhtml_system_config_custominformation</frontend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </header>
+                        <active translate="label" module="postdirekt_addressfactory">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <api_user translate="label comment" module="postdirekt_addressfactory">
+                            <label>API User</label>
+                            <sort_order>20</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </api_user>
+                        <api_password translate="label comment" module="postdirekt_addressfactory">
+                            <label>API Password</label>
+                            <sort_order>30</sort_order>
+                            <frontend_type>obscure</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </api_password>
+                        <configuration_name translate="label comment" module="postdirekt_addressfactory">
+                            <label>Configuration Name</label>
+                            <comment>Enter the name of the desired synchronization configuration that you have received from Deutsche Post Direkt.</comment>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </configuration_name>
+                        <mandate_name translate="label comment" module="postdirekt_addressfactory">>
+                            <label>Mandate Name</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[If you want to assign the API requests of this module to a specific client, enter the username of the client here.]]></comment>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </mandate_name>
+                        <logging_enabled translate="label comment" module="postdirekt_addressfactory">
+                            <label>Enable Logging</label>
+                            <comment><![CDATA[You must also have Magento general logging enabled. Attention: Logs can contain sensitive customer data! Logging should only be activated for troubleshooting purposes. The logs should be deleted regularly.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </logging_enabled>
+                        <log_level translate="label comment" module="postdirekt_addressfactory">
+                            <label>Log Level</label>
+                            <comment><![CDATA[Beware: Log level <em>Debug</em> will result in large log files.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>postdirekt_addressfactory/adminhtml_system_config_source_loglevel</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                    <logging_enabled>1</logging_enabled>
+                                </depends>
+                        </log_level>
+                        <hold_non_deliverable_orders translate="label comment" module="postdirekt_addressfactory">
+                            <label>Automatically Put on Hold</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment><![CDATA[Automatically put on hold orders that are undeliverable, possibly deliverable, or that failed analysis.]]></comment>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </hold_non_deliverable_orders>
+                        <auto_cancel_orders translate="label comment" module="postdirekt_addressfactory">
+                            <label>Automatically Cancel</label>
+                            <comment><![CDATA[Automatically cancel undeliverable orders.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </auto_cancel_orders>
+                        <auto_update_shipping_address translate="label comment" module="postdirekt_addressfactory">
+                            <label>Automatically Update Shipping Address</label>
+                            <comment><![CDATA[Automatically update order shipping addresses with ADDRESSFACTORY suggestions.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </auto_update_shipping_address>
+                        <automatic_address_analysis translate="label comment" module="postdirekt_addressfactory">
+                            <label>Automatic Address Analysis</label>
+                            <comment><![CDATA[Only use the option "Analysis on order placement" if problems occur in connection with "Analysis via Cron"]]>.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>postdirekt_addressfactory/adminhtml_system_config_source_automaticoptions</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </automatic_address_analysis>
+                        <auto_validate_manual_edited translate="label comment" module="postdirekt_addressfactory">
+                            <label>Automatic validation</label>
+                            <comment><![CDATA[Automatically validate manually edited addresses.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0z</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </auto_validate_manual_edited>
+                    </fields>
+                </postdirekt_addressfactory>
+            </groups>
+        </customer>
+    </sections>
+</config>

@@ -1,0 +1,31 @@
+<?php /** @var Postdirekt_Addressfactory_Block_Adminhtml_System_Config_Custominformation $this */ ?>
+<div class="postdirekt_addressfactory-custom-info">
+    <header>
+        <img src="<?php echo $this->escapeUrl($this->getLogoUrl()); ?>" alt="Deutsche Post Direkt Logo">
+        <p class="info">
+            <?php echo $this->escapeHtml($this->__('Version:')); ?>
+            <?php echo $this->escapeHtml($this->getModuleVersion()); ?>
+        </p>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col content">
+                <p>
+                    <?php echo $this->escapeHtml(
+                        $this->__(
+                        // @codingStandardsIgnoreLine
+                            'some text here'
+                        )
+                    ); ?>
+                </p>
+                <p><strong><?php echo $this->escapeHtml($this->__('To get started:')); ?></strong><br>
+                    <?php echo /** @noEscape */ $this->__(
+                    // @codingStandardsIgnoreLine
+                        'some text here',
+                        $this->escapeHtml('https://www.postdirekt.de/addressfactory')
+                    );?>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

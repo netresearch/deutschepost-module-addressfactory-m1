@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * See LICENSE.md for license details.
+ */
+-->
+<config>
+    <modules>
+        <Postdirekt_Addressfactory>
+            <version>1.0.0</version>
+        </Postdirekt_Addressfactory>
+    </modules>
+    <global>
+        <blocks>
+            <postdirekt_addressfactory>
+                <class>Postdirekt_Addressfactory_Block</class>
+            </postdirekt_addressfactory>
+        </blocks>
+        <helpers>
+            <postdirekt_addressfactory>
+                <class>Postdirekt_Addressfactory_Helper</class>
+            </postdirekt_addressfactory>
+        </helpers>
+        <models>
+            <postdirekt_addressfactory>
+                <class>Postdirekt_Addressfactory_Model</class>
+                <resourceModel>postdirekt_addressfactory_resource</resourceModel>
+            </postdirekt_addressfactory>
+            <postdirekt_addressfactory_resource>
+                <class>Postdirekt_Addressfactory_Model_Resource</class>
+                <entities>
+                    <analysis_result>
+                        <table>postdirekt_addressfactory_analysis_result</table>
+                    </analysis_result>
+                    <analysis_status>
+                        <table>postdirekt_addressfactory_analysis_status</table>
+                    </analysis_status>
+                </entities>
+            </postdirekt_addressfactory_resource>
+        </models>
+        <resources>
+            <postdirekt_addressfactory_setup>
+                <setup>
+                    <module>Postdirekt_Addressfactory</module>
+                </setup>
+            </postdirekt_addressfactory_setup>
+        </resources>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Postdirekt_Addressfactory before="Mage_Adminhtml">Postdirekt_Addressfactory_Adminhtml</Postdirekt_Addressfactory>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <postdirekt_addressfactory>
+                    <file>postdirekt_addressfactory.xml</file>
+                </postdirekt_addressfactory>
+            </updates>
+        </layout>
+    </adminhtml>
+    <default>
+        <customer>
+            <postdirekt_addressfactory>
+                <api_password backend_model="adminhtml/system_config_backend_encrypted"/>
+                <configuration_name>Standard</configuration_name>
+            </postdirekt_addressfactory>
+        </customer>
+    </default>
+</config>

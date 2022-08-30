@@ -1,4 +1,5 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
@@ -6,7 +7,6 @@
 declare(strict_types=1);
 
 use Postdirekt_Addressfactory_Model_Deliverability_Codes as DeliverabilityCodes;
-use Postdirekt_Addressfactory_Model_Order_StatusUpdater as AnalysisStatusUpdater;
 
 class Postdirekt_Addressfactory_Model_Order_Analysis
 {
@@ -76,7 +76,7 @@ class Postdirekt_Addressfactory_Model_Order_Analysis
         $currentStatus = $this->statusUpdater->getStatus($orderId);
         $statusCode = $this->deliverabilityScoreService->computeScore(
             $analysisResult->getStatusCodes(),
-            $currentStatus === AnalysisStatusUpdater::ADDRESS_CORRECTED
+            $currentStatus === Postdirekt_Addressfactory_Model_Order_Status::ADDRESS_CORRECTED
         );
         switch ($statusCode) {
             case DeliverabilityCodes::DELIVERABLE:

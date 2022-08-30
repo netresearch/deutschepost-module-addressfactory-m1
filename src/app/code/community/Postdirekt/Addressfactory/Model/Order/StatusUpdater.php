@@ -10,16 +10,6 @@ use Psr\Log\LoggerInterface;
 
 class Postdirekt_Addressfactory_Model_Order_StatusUpdater
 {
-    const NOT_ANALYSED = 'not_analysed';
-    const PENDING = 'pending';
-    const UNDELIVERABLE = 'undeliverable';
-    const CORRECTION_REQUIRED = 'correction_required';
-    const POSSIBLY_DELIVERABLE = 'possibly_deliverable';
-    const DELIVERABLE = 'deliverable';
-    const ADDRESS_CORRECTED = 'address_corrected';
-    const ANALYSIS_FAILED = 'analysis_failed';
-    const MANUALLY_EDITED = 'manually_edited';
-
     /**
      * @var LoggerInterface
      */
@@ -51,42 +41,42 @@ class Postdirekt_Addressfactory_Model_Order_StatusUpdater
 
     public function setStatusPending(int $orderId): bool
     {
-        return $this->updateStatus($orderId, self::PENDING);
+        return $this->updateStatus($orderId, Postdirekt_Addressfactory_Model_Order_Status::PENDING);
     }
 
     public function setStatusUndeliverable(int $orderId): bool
     {
-        return $this->updateStatus($orderId, self::UNDELIVERABLE);
+        return $this->updateStatus($orderId, Postdirekt_Addressfactory_Model_Order_Status::UNDELIVERABLE);
     }
 
     public function setStatusCorrectionRequired(int $orderId): bool
     {
-        return $this->updateStatus($orderId, self::CORRECTION_REQUIRED);
+        return $this->updateStatus($orderId, Postdirekt_Addressfactory_Model_Order_Status::CORRECTION_REQUIRED);
     }
 
     public function setStatusPossiblyDeliverable(int $orderId): bool
     {
-        return $this->updateStatus($orderId, self::POSSIBLY_DELIVERABLE);
+        return $this->updateStatus($orderId, Postdirekt_Addressfactory_Model_Order_Status::POSSIBLY_DELIVERABLE);
     }
 
     public function setStatusDeliverable(int $orderId): bool
     {
-        return $this->updateStatus($orderId, self::DELIVERABLE);
+        return $this->updateStatus($orderId, Postdirekt_Addressfactory_Model_Order_Status::DELIVERABLE);
     }
 
     public function setStatusAddressCorrected(int $orderId): bool
     {
-        return $this->updateStatus($orderId, self::ADDRESS_CORRECTED);
+        return $this->updateStatus($orderId, Postdirekt_Addressfactory_Model_Order_Status::ADDRESS_CORRECTED);
     }
 
     public function setStatusAnalysisFailed(int $orderId): bool
     {
-        return $this->updateStatus($orderId, self::ANALYSIS_FAILED);
+        return $this->updateStatus($orderId, Postdirekt_Addressfactory_Model_Order_Status::ANALYSIS_FAILED);
     }
 
     public function setStatusManuallyEdited(int $orderId): bool
     {
-        return $this->updateStatus($orderId, self::MANUALLY_EDITED);
+        return $this->updateStatus($orderId, Postdirekt_Addressfactory_Model_Order_Status::MANUALLY_EDITED);
     }
 
     public function getStatus(int $orderId): string
@@ -95,7 +85,7 @@ class Postdirekt_Addressfactory_Model_Order_StatusUpdater
             /** @var Postdirekt_Addressfactory_Model_Analysis_Status $deliverabilityStatus */
             $deliverabilityStatus = Mage::getModel('postdirekt_addressfactory/analysis_status')->load($orderId);
         } catch (Exception $exception) {
-            return self::NOT_ANALYSED;
+            return Postdirekt_Addressfactory_Model_Order_Status::NOT_ANALYSED;
         }
 
         return $deliverabilityStatus->getStatus();
@@ -104,12 +94,12 @@ class Postdirekt_Addressfactory_Model_Order_StatusUpdater
     public function isStatusCorrectable(string $status): bool
     {
         $correctableStatuses = [
-            self::ANALYSIS_FAILED,
-            self::UNDELIVERABLE,
-            self::POSSIBLY_DELIVERABLE,
-            self::DELIVERABLE,
-            self::CORRECTION_REQUIRED,
-            self::MANUALLY_EDITED
+            Postdirekt_Addressfactory_Model_Order_Status::ANALYSIS_FAILED,
+            Postdirekt_Addressfactory_Model_Order_Status::UNDELIVERABLE,
+            Postdirekt_Addressfactory_Model_Order_Status::POSSIBLY_DELIVERABLE,
+            Postdirekt_Addressfactory_Model_Order_Status::DELIVERABLE,
+            Postdirekt_Addressfactory_Model_Order_Status::CORRECTION_REQUIRED,
+            Postdirekt_Addressfactory_Model_Order_Status::MANUALLY_EDITED
         ];
 
         return \in_array($status, $correctableStatuses, true);

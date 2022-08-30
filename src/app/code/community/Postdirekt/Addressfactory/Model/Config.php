@@ -24,57 +24,72 @@ class Postdirekt_Addressfactory_Model_Config
         return Mage::getStoreConfigFlag(self::CONFIG_XML_FIELD_ENABLED, $store);
     }
 
-    public function getApiUser($store=null): string
+    public function getApiUser($store = null): string
     {
-        return (string) Mage::getStoreConfig(self::CONFIG_XML_FIELD_API_USER, $store);
+        return (string)Mage::getStoreConfig(self::CONFIG_XML_FIELD_API_USER, $store);
     }
 
     public function getApiPassword($store = null): string
     {
-        return (string) Mage::getStoreConfig(self::CONFIG_XML_FIELD_API_PASSWORD, $store);
+        return (string)Mage::getStoreConfig(self::CONFIG_XML_FIELD_API_PASSWORD, $store);
     }
 
-    public function getConfigurationName($store=null): string
+    public function getConfigurationName($store = null): string
     {
-        return (string) Mage::getStoreConfig(self::CONFIG_XML_FIELD_CONFIGURATION_NAME, $store);
+        return (string)Mage::getStoreConfig(self::CONFIG_XML_FIELD_CONFIGURATION_NAME, $store);
     }
 
-    public function getMandateName($store=null): string
+    public function getMandateName($store = null): string
     {
-        return (string) Mage::getStoreConfig(self::CONFIG_XML_FIELD_MANDATE_NAME, $store);
+        return (string)Mage::getStoreConfig(self::CONFIG_XML_FIELD_MANDATE_NAME, $store);
     }
 
-    public function isLoggingEnabled($store=null): bool
+    public function isLoggingEnabled($store = null): bool
     {
         return Mage::getStoreConfigFlag(self::CONFIG_XML_FIELD_LOGGING_ENABLED, $store);
     }
 
-    public function getLogLevel($store=null)
+    public function getLogLevel($store = null)
     {
         return Mage::getStoreConfig(self::CONFIG_XML_FIELD_LOG_LEVEL, $store);
     }
 
-    public function isHoldNonDeliverableOrders($store=null): bool
+    public function isHoldNonDeliverableOrders($store = null): bool
     {
         return Mage::getStoreConfigFlag(self::CONFIG_XML_FIELD_HOLD_NON_DELIVERABLE_ORDERS, $store);
     }
 
-    public function isAutoCancelOrders($store=null): bool
+    public function isAutoCancelOrders($store = null): bool
     {
         return Mage::getStoreConfigFlag(self::CONFIG_XML_FIELD_AUTO_CANCEL_ORDERS, $store);
     }
 
-    public function isAutoUpdateShippingAddress($store=null): bool
+    public function isAutoUpdateShippingAddress($store = null): bool
     {
         return Mage::getStoreConfigFlag(self::CONFIG_XML_FIELD_AUTO_UPDATE_SHIPPING_ADDRESS, $store);
     }
 
-    public function isAutomaticAddressAnalysis($store=null): bool
+    protected function getAutomaticAddressAnalysis($store = null): string
     {
-        return Mage::getStoreConfigFlag(self::CONFIG_XML_FIELD_AUTOMATIC_ADDRESS_ANALYSIS, $store);
+        return (string) Mage::getStoreConfig(self::CONFIG_XML_FIELD_AUTOMATIC_ADDRESS_ANALYSIS, $store);
     }
 
-    public function isAutoValidateManualEdited($store=null): bool
+    public function isManualAnalysisOnly($store = null): bool
+    {
+        return $this->getAutomaticAddressAnalysis($store) === Postdirekt_Addressfactory_Model_Adminhtml_System_Config_Source_Automaticoptions::NO_AUTOMATIC_ANALYSIS;
+    }
+
+    public function isAnalysisOnOrderPlace($store = null): bool
+    {
+        return $this->getAutomaticAddressAnalysis($store) === Postdirekt_Addressfactory_Model_Adminhtml_System_Config_Source_Automaticoptions::ON_ORDER_PLACE;
+    }
+
+    public function isAutomaticAddressAnalysis($store = null): bool
+    {
+        return $this->getAutomaticAddressAnalysis($store) === Postdirekt_Addressfactory_Model_Adminhtml_System_Config_Source_Automaticoptions::ANALYSIS_VIA_CRON;
+    }
+
+    public function isAutoValidateManualEdited($store = null): bool
     {
         return Mage::getStoreConfigFlag(self::CONFIG_XML_FIELD_AUTO_VALIDATE_MANUAL_EDITED, $store);
     }

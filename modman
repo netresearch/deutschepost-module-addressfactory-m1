@@ -1,0 +1,11 @@
+src/app/code/community/Postdirekt/Addressfactory app/code/community/Postdirekt/Addressfactory
+src/app/etc/modules/Postdirekt_Addressfactory.xml app/etc/modules/Postdirekt_Addressfactory.xml
+
+
+src/app/design/adminhtml/default/default/layout/postdirekt_addressfactory.xml app/design/adminhtml/default/default/layout/postdirekt_addressfactory.xml
+src/app/design/adminhtml/default/default/template/postdirekt_addressfactory/ app/design/adminhtml/default/default/template/postdirekt_addressfactory/
+
+
+
+src/skin/adminhtml/default/default/postdirekt_addressfactory.css skin/adminhtml/default/default/postdirekt_addressfactory.css
+src/skin/adminhtml/default/default/images/postdirekt_addressfactory/ skin/adminhtml/default/default/images/postdirekt_addressfactory/

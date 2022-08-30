@@ -1,0 +1,22 @@
+{
+    "name": "deutschepost/module-addressfactory-m1",
+    "license": "OSL-3.0",
+    "type": "magento-module",
+    "description": "Deutsche Post Direkt Addressfactory module for Magento® 1",
+    "suggest": {
+      "magento-hackathon/magento-composer-installer": "^3.0.6"
+    },
+    "authors": [
+      {
+        "email": "plugins@netresearch.de",
+        "name": "Netresearch DTT GmbH",
+        "role": "Manufacturer",
+        "homepage": "https://www.netresearch.de/"
+      }
+    ],
+    "require": {
+      "php": "^7.0",
+      "ext-json": "*",
+      "deutschepost/sdk-api-addressfactory": "^2.0.0"
+    }
+}

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
@@ -26,13 +27,13 @@ class Postdirekt_Addressfactory_Model_Deliverability_Codes
     const STATUS_CODES_SIGNIFICANTLY_CORRECTED = ['103', '108'];
 
     /**
-     * @var Mage_Core_Helper_Data
+     * @var Postdirekt_Addressfactory_Helper_Data
      */
     private $translator;
 
     public function __construct()
     {
-        $this->translator = Mage::helper('core');
+        $this->translator = Mage::helper('postdirekt_addressfactory/data');
     }
 
     /**

@@ -74,16 +74,16 @@ class Postdirekt_Addressfactory_Adminhtml_Sales_Order_AnalysisController extends
                 $failedOrderIds[] = $order->getIncrementId();
                 continue;
             }
-            if ($this->config->isHoldNonDeliverableOrders()) {
-                $isOnHold = $this->orderUpdater->holdIfNonDeliverable($order, $analysisResult);
-                if ($isOnHold) {
-                    $heldOrderIds[] = $order->getIncrementId();
-                }
-            }
             if ($this->config->isAutoCancelOrders()) {
                 $isCanceled = $this->orderUpdater->cancelIfUndeliverable($order, $analysisResult);
                 if ($isCanceled) {
                     $canceledOrderIds[] = $order->getIncrementId();
+                }
+            }
+            if ($this->config->isHoldNonDeliverableOrders()) {
+                $isOnHold = $this->orderUpdater->holdIfNonDeliverable($order, $analysisResult);
+                if ($isOnHold) {
+                    $heldOrderIds[] = $order->getIncrementId();
                 }
             }
         }
@@ -150,33 +150,36 @@ class Postdirekt_Addressfactory_Adminhtml_Sales_Order_AnalysisController extends
     {
         $orderId = (int) $this->getRequest()->getParam('order_id');
         $order = Mage::getModel('sales/order')->load($orderId);
+
         try {
             $analysisResults = $this->orderAnalysis->analyse([$order]);
             $analysisResult = $analysisResults[$orderId];
             if (!$analysisResult) {
                 throw new RuntimeException($this->__('Could not perform ADDRESSFACTORY DIRECT analysis for order.'));
             }
+
+            if ($this->config->isAutoCancelOrders()) {
+                $isCanceled = $this->orderUpdater->cancelIfUndeliverable($order, $analysisResult);
+                if ($isCanceled) {
+                    $this->_getSession()->addSuccess($this->__('Undeliverable Order canceled', $order->getIncrementId()));
+                }
+            }
+
+            if ($this->config->isHoldNonDeliverableOrders()) {
+                $isOnHold = $this->orderUpdater->holdIfNonDeliverable($order, $analysisResult);
+                if ($isOnHold) {
+                    $this->_getSession()->addSuccess($this->__('Non-deliverable Order put on hold'));
+                }
+            }
+
+            if ($this->config->isAutoUpdateShippingAddress()) {
+                $isUpdated = $this->orderUpdater->updateShippingAddress($order, $analysisResult);
+                if ($isUpdated) {
+                    $this->_getSession()->addSuccess($this->__('Order address updated with ADDRESSFACTORY DIRECT suggestion'));
+                }
+            }
         } catch (Throwable $e) {
             $this->_getSession()->addError($e->getMessage());
-        }
-
-        if ($this->config->isHoldNonDeliverableOrders($order->getStoreId())) {
-            $isOnHold = $this->orderUpdater->holdIfNonDeliverable($order, $analysisResult);
-            if ($isOnHold) {
-                $this->_getSession()->addSuccess($this->__('Non-deliverable Order put on hold'));
-            }
-        }
-        if ($this->config->isAutoCancelOrders($order->getStoreId())) {
-            $isCanceled = $this->orderUpdater->cancelIfUndeliverable($order, $analysisResult);
-            if ($isCanceled) {
-                $this->_getSession()->addSuccess($this->__('Undeliverable Order canceled', $order->getIncrementId()));
-            }
-        }
-        if ($this->config->isAutoUpdateShippingAddress($order->getStoreId())) {
-            $isUpdated = $this->orderUpdater->updateShippingAddress($order, $analysisResult);
-            if ($isUpdated) {
-                $this->_getSession()->addSuccess($this->__('Order address updated with ADDRESSFACTORY DIRECT suggestion'));
-            }
         }
 
         $this->_redirectReferer();

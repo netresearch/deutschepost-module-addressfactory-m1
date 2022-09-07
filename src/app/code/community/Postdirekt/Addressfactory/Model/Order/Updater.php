@@ -49,7 +49,14 @@ class Postdirekt_Addressfactory_Model_Order_Updater
         if ($score === DeliverabilityCodes::DELIVERABLE) {
             return false;
         }
-        $order->hold();
+
+        try {
+            $order->hold();
+            $order->save();
+        } catch (Throwable $e) {
+            return false;
+        }
+
         return $order->getState() === Mage_Sales_Model_Order::STATE_HOLDED;
     }
 
@@ -69,7 +76,13 @@ class Postdirekt_Addressfactory_Model_Order_Updater
         if ($score !== DeliverabilityCodes::UNDELIVERABLE) {
             return false;
         }
-        $order->cancel();
+
+        try {
+            $order->cancel();
+            $order->save();
+        } catch (Throwable $e) {
+            return false;
+        }
 
         return $order->getState() === Mage_Sales_Model_Order::STATE_CANCELED;
     }

@@ -54,24 +54,24 @@ class Postdirekt_Addressfactory_Model_Config
         return Mage::getStoreConfig(self::CONFIG_XML_FIELD_LOG_LEVEL, $store);
     }
 
-    public function isHoldNonDeliverableOrders($store = null): bool
+    public function isHoldNonDeliverableOrders(): bool
     {
-        return Mage::getStoreConfigFlag(self::CONFIG_XML_FIELD_HOLD_NON_DELIVERABLE_ORDERS, $store);
+        return Mage::getStoreConfigFlag(self::CONFIG_XML_FIELD_HOLD_NON_DELIVERABLE_ORDERS);
     }
 
-    public function isAutoCancelOrders($store = null): bool
+    public function isAutoCancelOrders(): bool
     {
-        return Mage::getStoreConfigFlag(self::CONFIG_XML_FIELD_AUTO_CANCEL_ORDERS, $store);
+        return Mage::getStoreConfigFlag(self::CONFIG_XML_FIELD_AUTO_CANCEL_ORDERS);
     }
 
-    public function isAutoUpdateShippingAddress($store = null): bool
+    public function isAutoUpdateShippingAddress(): bool
     {
-        return Mage::getStoreConfigFlag(self::CONFIG_XML_FIELD_AUTO_UPDATE_SHIPPING_ADDRESS, $store);
+        return Mage::getStoreConfigFlag(self::CONFIG_XML_FIELD_AUTO_UPDATE_SHIPPING_ADDRESS);
     }
 
-    protected function getAutomaticAddressAnalysis($store = null): string
+    protected function getAutomaticAddressAnalysis(): string
     {
-        return (string) Mage::getStoreConfig(self::CONFIG_XML_FIELD_AUTOMATIC_ADDRESS_ANALYSIS, $store);
+        return (string) Mage::getStoreConfig(self::CONFIG_XML_FIELD_AUTOMATIC_ADDRESS_ANALYSIS);
     }
 
     public function isManualAnalysisOnly($store = null): bool
@@ -89,8 +89,8 @@ class Postdirekt_Addressfactory_Model_Config
         return $this->getAutomaticAddressAnalysis($store) === Postdirekt_Addressfactory_Model_Adminhtml_System_Config_Source_Automaticoptions::ANALYSIS_VIA_CRON;
     }
 
-    public function isAutoValidateManualEdited($store = null): bool
+    public function isAutoValidateManualEdited(): bool
     {
-        return Mage::getStoreConfigFlag(self::CONFIG_XML_FIELD_AUTO_VALIDATE_MANUAL_EDITED, $store);
+        return Mage::getStoreConfigFlag(self::CONFIG_XML_FIELD_AUTO_VALIDATE_MANUAL_EDITED);
     }
 }

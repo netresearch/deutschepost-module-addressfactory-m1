@@ -121,4 +121,16 @@
             </postdirekt_addressfactory>
         </customer>
     </default>
+    <crontab>
+        <jobs>
+            <postdirekt_addressfactory_autoprocess>
+                <schedule>
+                    <cron_expr>*/5 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>postdirekt_addressfactory/cron_autoProcess::execute</model>
+                </run>
+            </postdirekt_addressfactory_autoprocess>
+        </jobs>
+    </crontab>
 </config>

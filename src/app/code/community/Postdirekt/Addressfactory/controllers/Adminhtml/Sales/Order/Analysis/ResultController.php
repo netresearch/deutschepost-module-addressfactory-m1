@@ -33,22 +33,19 @@ class Postdirekt_Addressfactory_Adminhtml_Sales_Order_Analysis_ResultController 
     {
         $orderId = $this->getRequest()->getParam('order_id');
         $order = Mage::getModel('sales/order')->load($orderId);
-        try {
-            $analysisResults = $this->orderAnalysis->analyse([$order]);
-            $analysisResult = $analysisResults[$orderId];
-            if (!$analysisResult instanceof Postdirekt_Addressfactory_Model_Analysis_Result) {
-                throw new RuntimeException($this->__('Could not perform ADDRESSFACTORY DIRECT analysis for order.'));
-            }
 
+        $analysisResults = $this->orderAnalysis->analyse([$order]);
+        $analysisResult = $analysisResults[$orderId];
+
+        if (!$analysisResult instanceof Postdirekt_Addressfactory_Model_Analysis_Result) {
+            $this->_getSession()->addError($this->__('Could not perform ADDRESSFACTORY DIRECT analysis for order.'));
+        } else {
             $wasUpdated = $this->orderUpdater->updateShippingAddress($order, $analysisResult);
             if ($wasUpdated) {
                 $this->_getSession()->addSuccess($this->__('Order address updated with ADDRESSFACTORY DIRECT suggestion.'));
             } else {
-                throw new RuntimeException($this->__('Could not update order address with ADDRESSFACTORY DIRECT suggestion.'));
+                $this->_getSession()->addError($this->__('Could not update order address with ADDRESSFACTORY DIRECT suggestion.'));
             }
-
-        } catch (Throwable $e) {
-            $this->_getSession()->addError($e->getMessage());
         }
 
         $this->_redirectReferer();

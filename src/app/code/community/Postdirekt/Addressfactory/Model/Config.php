@@ -74,19 +74,19 @@ class Postdirekt_Addressfactory_Model_Config
         return (string) Mage::getStoreConfig(self::CONFIG_XML_FIELD_AUTOMATIC_ADDRESS_ANALYSIS);
     }
 
-    public function isManualAnalysisOnly($store = null): bool
+    public function isManualAnalysisOnly(): bool
     {
-        return $this->getAutomaticAddressAnalysis($store) === Postdirekt_Addressfactory_Model_Adminhtml_System_Config_Source_Automaticoptions::NO_AUTOMATIC_ANALYSIS;
+        return $this->getAutomaticAddressAnalysis() === Postdirekt_Addressfactory_Model_Adminhtml_System_Config_Source_Automaticoptions::NO_AUTOMATIC_ANALYSIS;
     }
 
-    public function isAnalysisOnOrderPlace($store = null): bool
+    public function isAnalysisOnOrderPlace(): bool
     {
-        return $this->getAutomaticAddressAnalysis($store) === Postdirekt_Addressfactory_Model_Adminhtml_System_Config_Source_Automaticoptions::ON_ORDER_PLACE;
+        return $this->getAutomaticAddressAnalysis() === Postdirekt_Addressfactory_Model_Adminhtml_System_Config_Source_Automaticoptions::ON_ORDER_PLACE;
     }
 
-    public function isAutomaticAddressAnalysis($store = null): bool
+    public function isAutomaticAddressAnalysis(): bool
     {
-        return $this->getAutomaticAddressAnalysis($store) === Postdirekt_Addressfactory_Model_Adminhtml_System_Config_Source_Automaticoptions::ANALYSIS_VIA_CRON;
+        return $this->getAutomaticAddressAnalysis() === Postdirekt_Addressfactory_Model_Adminhtml_System_Config_Source_Automaticoptions::ANALYSIS_VIA_CRON;
     }
 
     public function isAutoValidateManualEdited(): bool

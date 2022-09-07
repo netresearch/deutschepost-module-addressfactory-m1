@@ -45,15 +45,17 @@
                 </setup>
             </postdirekt_addressfactory_setup>
         </resources>
-        <sales_order_place_after>
-            <observers>
-                <postdirekt_addressfactory_init_deliverability_status>
-                    <class>postdirekt_addressfactory/observer_placeOrder</class>
-                    <method>initDeliverabilityStatus</method>
-                    <type>singleton</type>
-                </postdirekt_addressfactory_init_deliverability_status>
-            </observers>
-        </sales_order_place_after>
+        <events>
+            <sales_order_place_after>
+                <observers>
+                    <postdirekt_addressfactory_init_deliverability_status>
+                        <class>postdirekt_addressfactory/observer_placeOrder</class>
+                        <method>initDeliverabilityStatus</method>
+                        <type>singleton</type>
+                    </postdirekt_addressfactory_init_deliverability_status>
+                </observers>
+            </sales_order_place_after>
+        </events>
     </global>
     <admin>
         <routers>

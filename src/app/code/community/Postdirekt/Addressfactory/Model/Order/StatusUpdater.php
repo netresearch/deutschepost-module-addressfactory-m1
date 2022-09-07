@@ -81,14 +81,10 @@ class Postdirekt_Addressfactory_Model_Order_StatusUpdater
 
     public function getStatus(int $orderId): string
     {
-        try {
-            /** @var Postdirekt_Addressfactory_Model_Analysis_Status $deliverabilityStatus */
-            $deliverabilityStatus = Mage::getModel('postdirekt_addressfactory/analysis_status')->load($orderId);
-        } catch (Exception $exception) {
-            return Postdirekt_Addressfactory_Model_Order_Status::NOT_ANALYSED;
-        }
+        /** @var Postdirekt_Addressfactory_Model_Analysis_Status $deliverabilityStatus */
+        $deliverabilityStatus = Mage::getModel('postdirekt_addressfactory/analysis_status')->load($orderId);
 
-        return $deliverabilityStatus->getStatus();
+        return $deliverabilityStatus->getStatus() ?: Postdirekt_Addressfactory_Model_Order_Status::NOT_ANALYSED;
     }
 
     public function isStatusCorrectable(string $status): bool

@@ -90,12 +90,12 @@ class Postdirekt_Addressfactory_Adminhtml_Sales_Order_AnalysisController extends
 
         if (!empty($heldOrderIds)) {
             $this->_getSession()->addSuccess(
-                $this->__('Non-deliverable Order(s) %s were put on hold.', implode(', ', $heldOrderIds))
+                $this->__('Non-deliverable order(s) %s put on hold.', implode(', ', $heldOrderIds))
             );
         }
         if (!empty($canceledOrderIds)) {
             $this->_getSession()->addSuccess(
-                $this->__('Undeliverable Order(s) %s were canceled.', implode(', ', $canceledOrderIds))
+                $this->__('Undeliverable order(s) %s canceled.', implode(', ', $canceledOrderIds))
             );
         }
         if (!empty($failedOrderIds)) {
@@ -144,7 +144,7 @@ class Postdirekt_Addressfactory_Adminhtml_Sales_Order_AnalysisController extends
     }
 
     /**
-     * Single Order analysis
+     * Single order analysis
      */
     public function analyzeAction()
     {
@@ -161,21 +161,21 @@ class Postdirekt_Addressfactory_Adminhtml_Sales_Order_AnalysisController extends
             if ($this->config->isAutoCancelOrders()) {
                 $isCanceled = $this->orderUpdater->cancelIfUndeliverable($order, $analysisResult);
                 if ($isCanceled) {
-                    $this->_getSession()->addSuccess($this->__('Undeliverable Order canceled', $order->getIncrementId()));
+                    $this->_getSession()->addSuccess($this->__('Undeliverable order canceled.', $order->getIncrementId()));
                 }
             }
 
             if ($this->config->isHoldNonDeliverableOrders()) {
                 $isOnHold = $this->orderUpdater->holdIfNonDeliverable($order, $analysisResult);
                 if ($isOnHold) {
-                    $this->_getSession()->addSuccess($this->__('Non-deliverable Order put on hold'));
+                    $this->_getSession()->addSuccess($this->__('Non-deliverable order put on hold.'));
                 }
             }
 
             if ($this->config->isAutoUpdateShippingAddress()) {
                 $isUpdated = $this->orderUpdater->updateShippingAddress($order, $analysisResult);
                 if ($isUpdated) {
-                    $this->_getSession()->addSuccess($this->__('Order address updated with ADDRESSFACTORY DIRECT suggestion'));
+                    $this->_getSession()->addSuccess($this->__('Order address updated with ADDRESSFACTORY DIRECT suggestion.'));
                 }
             }
         } catch (Throwable $e) {

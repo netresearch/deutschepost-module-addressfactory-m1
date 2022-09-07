@@ -120,15 +120,15 @@ class Postdirekt_Addressfactory_Model_Cron_AutoProcess
         $schedule->setStatus(Mage_Cron_Model_Schedule::STATUS_SUCCESS);
 
         if (!empty($heldOrderIds)) {
-            $cronMessages[] = $this->translator->__('Non-deliverable orders %s were put on hold.', implode(', ', $heldOrderIds));
+            $cronMessages[] = $this->translator->__('Non-deliverable order(s) %s put on hold.', implode(', ', $heldOrderIds));
         }
 
         if (!empty($canceledOrderIds)) {
-            $cronMessages[] = $this->translator->__('Undeliverable orders %s were canceled.', implode(', ', $canceledOrderIds));
+            $cronMessages[] = $this->translator->__('Undeliverable order(s) %s canceled.', implode(', ', $canceledOrderIds));
         }
 
         if (!empty($updatedOrderIds)) {
-            $cronMessages[] = $this->translator->__('Shipping addresses of orders %s were updated.', implode(', ', $updatedOrderIds));
+            $cronMessages[] = $this->translator->__('Shipping address(es) of order(s) %s updated.', implode(', ', $updatedOrderIds));
         }
 
         if (!empty($failedOrderIds)) {

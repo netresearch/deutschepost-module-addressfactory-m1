@@ -54,6 +54,6 @@ class Postdirekt_Addressfactory_Block_Adminhtml_System_Config_Custominformation
      */
     public function getLogoUrl()
     {
-        return Mage::getDesign()->getSkinUrl('images/postdirekt_addressfactory/deutsche-post-logo.png');
+        return Mage::getDesign()->getSkinUrl('images/postdirekt_addressfactory/logo_deutsche_post.png');
     }
 }

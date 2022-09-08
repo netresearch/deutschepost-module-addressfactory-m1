@@ -5,11 +5,27 @@
  */
 -->
 <layout>
-    <adminhtml_system_config_edit>
+    <postdirekt_addressfactory_css>
         <reference name="head">
             <action method="addCss">
                 <stylesheet>postdirekt_addressfactory.css</stylesheet>
             </action>
         </reference>
+    </postdirekt_addressfactory_css>
+
+    <adminhtml_system_config_edit>
+        <update handle="postdirekt_addressfactory_css"/>
     </adminhtml_system_config_edit>
+
+    <adminhtml_sales_order_view>
+        <update handle="postdirekt_addressfactory_css"/>
+
+        <reference name="order_info">
+            <block type="postdirekt_addressfactory/adminhtml_sales_order_info_analysis"
+                   name="addressfactory.sales.order.info.analyis_data"
+                   as="analysis_data"
+                   template="postdirekt_addressfactory/sales/order/info/analysis_data.phtml"
+            />
+        </reference>
+    </adminhtml_sales_order_view>
 </layout>

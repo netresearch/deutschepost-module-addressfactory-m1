@@ -43,12 +43,12 @@ class Postdirekt_Addressfactory_Model_Logger extends AbstractLogger
 
     public function log($level, $message, array $context = array())
     {
-        if (!$this->config->isLoggingEnabled($this->_scope)) {
+        if (!$this->config->isLoggingEnabled($this->scope)) {
             return;
         }
 
         $zendLogLevel = $this->levelMapping[$level];
-        $configLogLevel = $this->config->getLogLevel($this->_scope);
+        $configLogLevel = $this->config->getLogLevel($this->scope);
 
         // only log if configured loglevel is below or same as the logLevel that's coming in via parameter
         if ($zendLogLevel <= $configLogLevel) {

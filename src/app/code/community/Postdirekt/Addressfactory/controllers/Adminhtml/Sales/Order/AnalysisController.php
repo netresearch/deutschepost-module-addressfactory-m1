@@ -1,4 +1,5 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
@@ -30,35 +31,45 @@ class Postdirekt_Addressfactory_Adminhtml_Sales_Order_AnalysisController extends
     }
 
     /**
-     * MassAction for Order analysis
+     * Returns orders with shipping address in Germany.
+     *
+     * @param string[] $orderIds
+     * @return Mage_Sales_Model_Order[]
      */
-    public function massAnalyze()
+    private function getOrders(array $orderIds): array
     {
-        $orderIds = $this->getRequest()->getParam('order_ids');
-        $orderCollection = Mage::getModel('sales/order')->getCollection();
-        $orderCollection->join(
-            'sales_order_address',
-            'main_table.entity_id=sales_order_address.parent_id',
-            ['address_type', 'country_id']
-        );
-        $orderCollection->addAttributeToFilter('sales_order_address.address_type', 'shipping');
-        $orderCollection->addAttributeToFilter('sales_order_address.country_id', 'DE');
-        $orderCollection->addFieldToFilter('order_id', ['in' => $orderIds]);
-
         try {
-            $analysisResults = $this->orderAnalysis->analyse($orderCollection->getItems());
-        } catch (Throwable $exception) {
-            $this->_getSession()->addError($exception->getMessage());
-            $this->_redirectReferer();
-            return;
+            $orderCollection = Mage::getModel('sales/order')->getCollection();
+        } catch (Mage_Core_Exception $e) {
+            return [];
         }
 
+        $orderCollection->getSelect()->join(
+            ['order_address' => $orderCollection->getTable('sales/order_address')],
+            'main_table.entity_id = order_address.parent_id',
+            ['address_type', 'country_id']
+        );
+        $orderCollection->addAttributeToFilter('order_address.address_type', 'shipping');
+        $orderCollection->addAttributeToFilter('order_address.country_id', 'DE');
+        $orderCollection->addFieldToFilter('parent_id', ['in' => $orderIds]);
+
+        return $orderCollection->getItems();
+    }
+
+    /**
+     * Send orders to analysis service and store results. Update order status if applicable (hold, cancel).
+     */
+    public function massAnalyzeAction()
+    {
         $heldOrderIds = [];
         $canceledOrderIds = [];
         $failedOrderIds = [];
-        /** @var Mage_Sales_Model_Order $order */
-        foreach ($orderCollection->getItems() as $order) {
-            $analysisResult = $analysisResults[(int)$order->getEntityId()];
+
+        $orders = $this->getOrders($this->getRequest()->getParam('order_ids'));
+        $analysisResults = $this->orderAnalysis->analyse($orders);
+
+        foreach ($orders as $order) {
+            $analysisResult = $analysisResults[(int) $order->getId()];
             if (!$analysisResult) {
                 $failedOrderIds[] = $order->getIncrementId();
                 continue;
@@ -76,6 +87,7 @@ class Postdirekt_Addressfactory_Adminhtml_Sales_Order_AnalysisController extends
                 }
             }
         }
+
         if (!empty($heldOrderIds)) {
             $this->_getSession()->addSuccess(
                 $this->__('Non-deliverable Order(s) %s were put on hold.', implode(', ', $heldOrderIds))
@@ -96,17 +108,53 @@ class Postdirekt_Addressfactory_Adminhtml_Sales_Order_AnalysisController extends
     }
 
     /**
+     * Send orders to analysis service and store results. Apply result to shipping address if applicable.
+     */
+    public function massUpdateAction()
+    {
+        $updatedOrderIds = [];
+        $failedOrderIds = [];
+
+        $orders = $this->getOrders($this->getRequest()->getParam('order_ids'));
+        $analysisResults = $this->orderAnalysis->analyse($orders);
+
+        foreach ($orders as $order) {
+            $analysisResult = $analysisResults[(int) $order->getId()];
+
+            /* Try to update the shipping address of each order */
+            if ($analysisResult && $this->orderUpdater->updateShippingAddress($order, $analysisResult)) {
+                $updatedOrderIds[] = $order->getIncrementId();
+            } else {
+                $failedOrderIds[] = $order->getIncrementId();
+            }
+        }
+
+        if (!empty($updatedOrderIds)) {
+            $this->_getSession()->addSuccess(
+                $this->__('Order(s) %s were successfully updated.', implode(', ', $updatedOrderIds))
+            );
+        }
+        if (!empty($failedOrderIds)) {
+            $this->_getSession()->addError(
+                $this->__('Order(s) %s could not be updated.', implode(', ', $failedOrderIds))
+            );
+        }
+
+        $this->_redirectReferer();
+    }
+
+    /**
      * Single Order analysis
      */
-    public function analyze()
+    public function analyzeAction()
     {
-        $orderId = $this->getRequest()->getParam('order_id');
+        $orderId = (int) $this->getRequest()->getParam('order_id');
         $order = Mage::getModel('sales/order')->load($orderId);
         try {
             $analysisResults = $this->orderAnalysis->analyse([$order]);
             $analysisResult = $analysisResults[$orderId];
             if (!$analysisResult) {
-                throw new RuntimeException($this->__('Could not perform ADDRESSFACTORY DIRECT analysis for Order'));
+                throw new RuntimeException($this->__('Could not perform ADDRESSFACTORY DIRECT analysis for order.'));
             }
         } catch (Throwable $e) {
             $this->_getSession()->addError($e->getMessage());

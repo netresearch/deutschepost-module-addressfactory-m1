@@ -1,0 +1,66 @@
+<?php /** @var Postdirekt_Addressfactory_Block_Adminhtml_Sales_Order_Info_Analysis $this */ ?>
+
+<div class="box-right pd_info_box">
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head">
+                <?php echo Mage::helper('postdirekt_addressfactory/data')->__('Shipping Address Check') ?>
+            </h4>
+            <img src="<?php echo $this->escapeUrl($this->getLogoUrl()); ?>" alt="PostDirekt ADDRESSFACTORY">
+        </div>
+        <div class="fieldset">
+            <?php $analysisResult = $this->getAnalysisResult() ?>
+            <?php if (!$analysisResult instanceof Postdirekt_Addressfactory_Model_Analysis_Result): ?>
+                <?= $this->getAnalyzeButtonHtml(); ?>
+            <?php else: ?>
+                <div class="pd_deliverability_score <?= $this->escapeHtml($this->getScore()) ?>">
+                    <?= $this->escapeHtml($this->getHumanReadableScore()) ?>
+                </div>
+
+                <?php if ($infos = $this->getDetectedIssues()): ?>
+                    <div class="pd_info_box_item">
+                        <h4><?= $this->escapeHtml($this->__('Address Information'))?></h4>
+                        <ul>
+                            <?php foreach ($infos as $info): ?>
+                                <li>
+                                    <span class="<?= $this->escapeHtml($this->getIssueIconClass($info['icon'])) ?>"
+                                          title="<?= $this->escapeHtml($info['code']) ?>">
+                                        <?= $this->escapeHtml($info['label']) ?>
+                                    </span>
+                                </li>
+                            <?php endforeach;?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($this->hasAddressSuggestion()): ?>
+                    <div class="pd_info_box_item">
+                        <h3><?= $this->escapeHtml($this->__('Suggested Shipping Address')) ?></h3>
+                        <dl>
+                            <?= $this->getAddressSuggestionHtml() ?>
+                        </dl>
+
+                        <?php if ($this->canApplyAddressSuggestion()) : ?>
+                            <?= $this->getApplySuggestionButtonHtml() ?>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+
+                <div class="pd_info_box_item">
+                    <h4><?= $this->escapeHtml($this->__('Other Actions')) ?></h4>
+
+                    <?= $this->getAddressEditButtonHtml(); ?>
+
+                    <?php if ($this->canUnhold()): ?>
+                        <?= $this->getUnholdButtonHtml(); ?>
+                    <?php endif; ?>
+
+                    <?php if ($this->canCancel()): ?>
+                        <?= $this->getCancelButtonHtml(); ?>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>

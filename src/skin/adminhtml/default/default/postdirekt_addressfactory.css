@@ -41,3 +41,62 @@
 .postdirekt_addressfactory-custom-info header img {
     width: 150px;
 }
+
+.pd_deliverability_score {
+    font-size: 1.2em;
+}
+
+.pd_info_box .entry-edit-head > img {
+    margin: 10px 0 10px 20px;
+    max-height: 16px;
+    float: right;
+}
+
+.pd_info_box .pd_deliverability_score::before {
+    content: '\25CF';
+    vertical-align: text-top;
+}
+
+.pd_info_box .deliverable::before {
+    color: #50be03;
+}
+
+.pd_info_box .possibly_deliverable::before {
+    color: #ffcc01;
+}
+
+.pd_info_box .correction_required::before {
+    color: red;
+}
+
+.pd_info_box .undeliverable::before {
+    color: red;
+}
+
+.pd_info_box .icon-info::before {
+    content: '\2139';
+}
+
+.pd_info_box .icon-alert::before {
+    content: '\26a0';
+}
+
+.pd_info_box_item {
+    background-color: white;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.pd_info_box_item h4 {
+    margin-bottom: .5em;
+    font-size: 1.25em;
+}
+
+.pd_info_box_item button, .pd_deliverability_score + button {
+    margin-top: 0.5em;
+}
+
+.pd_address_suggestion {
+    background-color: white;
+    padding: 10px;
+}

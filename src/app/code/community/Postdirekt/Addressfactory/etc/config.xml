@@ -48,13 +48,12 @@
         <sales_order_place_after>
             <observers>
                 <postdirekt_addressfactory_init_deliverability_status>
-                    <class>postdirekt_addressfactory/observer_deliverabilityStatus</class>
+                    <class>postdirekt_addressfactory/observer_placeOrder</class>
                     <method>initDeliverabilityStatus</method>
                     <type>singleton</type>
                 </postdirekt_addressfactory_init_deliverability_status>
             </observers>
         </sales_order_place_after>
-
     </global>
     <admin>
         <routers>
@@ -76,23 +75,41 @@
             </updates>
         </layout>
         <events>
+            <adminhtml_block_html_before>
+                <observers>
+                    <add_analysis_mass_action>
+                        <type>singleton</type>
+                        <class>postdirekt_addressfactory/observer_renderOrderGrid</class>
+                        <method>addAnalysisMassAction</method>
+                    </add_analysis_mass_action>
+                </observers>
+            </adminhtml_block_html_before>
             <sales_order_grid_collection_load_before>
                 <observers>
-                    <postdirekt_addressfactory_extendedgrid>
-                        <class>postdirekt_addressfactory/observer_deliverabilityStatus</class>
+                    <postdirekt_addressfactory_ordergrid_data>
+                        <class>postdirekt_addressfactory/observer_renderOrderGrid</class>
                         <method>addStatusToOrderGridCollection</method>
-                    </postdirekt_addressfactory_extendedgrid>
+                    </postdirekt_addressfactory_ordergrid_data>
                 </observers>
             </sales_order_grid_collection_load_before>
             <core_layout_block_create_after>
                 <observers>
                     <postdirekt_addressfactory_ordergrid_column>
-                        <class>postdirekt_addressfactory/observer_deliverabilityStatus</class>
+                        <class>postdirekt_addressfactory/observer_renderOrderGrid</class>
                         <method>addColumnToGrid</method>
                         <type>singleton</type>
                     </postdirekt_addressfactory_ordergrid_column>
                 </observers>
             </core_layout_block_create_after>
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <add_analysis_data_block>
+                        <type>singleton</type>
+                        <class>postdirekt_addressfactory/observer_renderOrderView</class>
+                        <method>addAnalysisData</method>
+                    </add_analysis_data_block>
+                </observers>
+            </core_block_abstract_to_html_after>
         </events>
     </adminhtml>
     <default>

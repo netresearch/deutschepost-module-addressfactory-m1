@@ -54,15 +54,9 @@ class Postdirekt_Addressfactory_Model_Cron_AutoProcess
             'main_table.entity_id = status_table.order_id'
         );
 
+        $orderStatus = [Postdirekt_Addressfactory_Model_Order_Status::PENDING];
         if ($includeEdited) {
-            $orderStatus = [
-                Postdirekt_Addressfactory_Model_Order_Status::PENDING,
-                Postdirekt_Addressfactory_Model_Order_Status::MANUALLY_EDITED,
-            ];
-        } else {
-            $orderStatus = [
-                Postdirekt_Addressfactory_Model_Order_Status::PENDING,
-            ];
+            $orderStatus[] = Postdirekt_Addressfactory_Model_Order_Status::MANUALLY_EDITED;
         }
 
         $orderCollection->addFieldToFilter(
@@ -88,7 +82,7 @@ class Postdirekt_Addressfactory_Model_Cron_AutoProcess
         $analysisResults = $this->orderAnalysis->analyse($orders);
 
         foreach ($orders as $order) {
-            $analysisResult = $analysisResults[(int)$order->getEntityId()];
+            $analysisResult = $analysisResults[(int) $order->getId()];
             if (!$analysisResult) {
                 $failedOrderIds[] = $order->getIncrementId();
                 continue;

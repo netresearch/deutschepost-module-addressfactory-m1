@@ -63,7 +63,7 @@ class Postdirekt_Addressfactory_Model_Observer_PlaceOrder
             return;
         }
 
-        $orderId = (int)$order->getEntityId();
+        $orderId = (int) $order->getId();
         $status = $this->statusUpdater->getStatus($orderId);
         if ($status !== Postdirekt_Addressfactory_Model_Order_Status::NOT_ANALYSED) {
             // The order already has been analysed

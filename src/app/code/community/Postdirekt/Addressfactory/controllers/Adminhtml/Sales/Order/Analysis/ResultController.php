@@ -31,15 +31,13 @@ class Postdirekt_Addressfactory_Adminhtml_Sales_Order_Analysis_ResultController 
      */
     public function applyAction()
     {
-        $orderId = $this->getRequest()->getParam('order_id');
+        $orderId = (int) $this->getRequest()->getParam('order_id');
         $order = Mage::getModel('sales/order')->load($orderId);
+        /** @var Postdirekt_Addressfactory_Model_Analysis_Result $analysisResult */
+        $analysisResult = Mage::getModel('postdirekt_addressfactory/analysis_result')->load($order->getShippingAddressId());
 
-        // todo(nr): why not `load` analysis result by ID? `analyze` updates the deliverability status (db write).
-        $analysisResults = $this->orderAnalysis->analyse([$order]);
-        $analysisResult = $analysisResults[$orderId];
-
-        if (!$analysisResult instanceof Postdirekt_Addressfactory_Model_Analysis_Result) {
-            $this->_getSession()->addError($this->__('Could not perform ADDRESSFACTORY DIRECT analysis for order.'));
+        if (!$analysisResult->getId()) {
+            $this->_getSession()->addError($this->__('Could not apply ADDRESSFACTORY DIRECT address suggestion for order.'));
         } else {
             $wasUpdated = $this->orderUpdater->updateShippingAddress($order, $analysisResult);
             if ($wasUpdated) {

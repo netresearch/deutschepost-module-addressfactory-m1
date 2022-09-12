@@ -44,6 +44,11 @@ class Postdirekt_Addressfactory_Model_Order_StatusUpdater
         return $this->updateStatus($orderId, Postdirekt_Addressfactory_Model_Order_Status::PENDING);
     }
 
+    public function setStatusNotAnalyzed(int $orderId): bool
+    {
+        return $this->updateStatus($orderId, Postdirekt_Addressfactory_Model_Order_Status::NOT_ANALYSED);
+    }
+
     public function setStatusUndeliverable(int $orderId): bool
     {
         return $this->updateStatus($orderId, Postdirekt_Addressfactory_Model_Order_Status::UNDELIVERABLE);

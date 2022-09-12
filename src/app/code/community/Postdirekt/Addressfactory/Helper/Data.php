@@ -1,7 +1,10 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
+declare(strict_types=1);
 
 class Postdirekt_Addressfactory_Helper_Data extends Mage_Core_Helper_Data
 {
@@ -10,7 +13,7 @@ class Postdirekt_Addressfactory_Helper_Data extends Mage_Core_Helper_Data
      *
      * @return string
      */
-    public function getModuleVersion()
+    public function getModuleVersion(): string
     {
         $moduleName = $this->_getModuleName();
 

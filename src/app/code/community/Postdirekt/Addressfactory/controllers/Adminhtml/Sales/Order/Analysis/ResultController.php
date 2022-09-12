@@ -34,6 +34,7 @@ class Postdirekt_Addressfactory_Adminhtml_Sales_Order_Analysis_ResultController 
         $orderId = $this->getRequest()->getParam('order_id');
         $order = Mage::getModel('sales/order')->load($orderId);
 
+        // todo(nr): why not `load` analysis result by ID? `analyze` updates the deliverability status (db write).
         $analysisResults = $this->orderAnalysis->analyse([$order]);
         $analysisResult = $analysisResults[$orderId];
 

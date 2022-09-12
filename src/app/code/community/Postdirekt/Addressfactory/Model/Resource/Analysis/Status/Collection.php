@@ -4,6 +4,8 @@
  * See LICENSE.md for license details.
  */
 
+declare(strict_types=1);
+
 class Postdirekt_Addressfactory_Model_Resource_Analysis_Statuts_Collection extends Mage_Core_Model_Resource_Db_Collection_Abstract
 {
     /**

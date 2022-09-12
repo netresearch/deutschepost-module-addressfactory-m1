@@ -4,6 +4,8 @@
  * See LICENSE.md for license details.
  */
 
+declare(strict_types=1);
+
 class Postdirekt_Addressfactory_Model_Config
 {
     const CONFIG_XML_FIELD_ENABLED = 'customer/postdirekt_addressfactory/active';

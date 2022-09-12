@@ -53,11 +53,12 @@ class Postdirekt_Addressfactory_Model_Observer_PlaceOrder
             // order is virtual or broken
             return;
         }
+
         if ($order->getShippingAddress()->getCountryId() !== 'DE') {
             // Addressfactory is only available for German addresses
             return;
         }
-        $storeId = (string) $order->getStoreId();
+
         if ($this->config->isManualAnalysisOnly()) {
             // Manual analysis is not handled
             return;

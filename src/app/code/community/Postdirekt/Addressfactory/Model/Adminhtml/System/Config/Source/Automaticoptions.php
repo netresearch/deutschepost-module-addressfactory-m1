@@ -4,6 +4,8 @@
  * See LICENSE.md for license details.
  */
 
+declare(strict_types=1);
+
 class Postdirekt_Addressfactory_Model_Adminhtml_System_Config_Source_Automaticoptions
 {
     const NO_AUTOMATIC_ANALYSIS = '1';

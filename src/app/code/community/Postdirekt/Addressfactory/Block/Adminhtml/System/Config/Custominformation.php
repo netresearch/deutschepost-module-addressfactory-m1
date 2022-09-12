@@ -4,6 +4,8 @@
  * See LICENSE.md for license details.
  */
 
+declare(strict_types=1);
+
 class Postdirekt_Addressfactory_Block_Adminhtml_System_Config_Custominformation
     extends Mage_Adminhtml_Block_System_Config_Form_Field
 {

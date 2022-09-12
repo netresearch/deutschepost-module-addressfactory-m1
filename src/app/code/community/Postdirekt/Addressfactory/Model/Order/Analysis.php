@@ -37,7 +37,7 @@ class Postdirekt_Addressfactory_Model_Order_Analysis
      * for the Shipping Address of every given Order.
      *
      * @param Mage_Sales_Model_Order[] $orders
-     * @return Postdirekt_Addressfactory_Model_Analysis_Result[] Dictionary: [(int) $order->getEntityId() => AnalysisResult]
+     * @return Postdirekt_Addressfactory_Model_Analysis_Result[] Dictionary: [(int) $order->getId() => AnalysisResult]
      */
     public function analyse(array $orders): array
     {
@@ -53,9 +53,9 @@ class Postdirekt_Addressfactory_Model_Order_Analysis
         }
         $result = [];
         foreach ($orders as $order) {
-            $analysisResult = $analysisResults[(int)$order->getShippingAddress()->getEntityId()] ?? null;
+            $analysisResult = $analysisResults[(int) $order->getShippingAddress()->getId()] ?? null;
             $this->updateDeliverabilityStatus((int)$order->getId(), $analysisResult);
-            $result[$order->getEntityId()] = $analysisResult;
+            $result[$order->getId()] = $analysisResult;
         }
 
         return $result;

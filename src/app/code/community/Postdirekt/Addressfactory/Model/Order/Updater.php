@@ -32,7 +32,6 @@ class Postdirekt_Addressfactory_Model_Order_Updater
         $this->addressUpdater = Mage::getSingleton('postdirekt_addressfactory/address_updater');
     }
 
-
     /**
      * @param Mage_Sales_Model_Order $order
      * @param Postdirekt_Addressfactory_Model_Analysis_Result $analysisResult
@@ -87,7 +86,6 @@ class Postdirekt_Addressfactory_Model_Order_Updater
         return $order->getState() === Mage_Sales_Model_Order::STATE_CANCELED;
     }
 
-
     /**
      * @param Mage_Sales_Model_Order $order
      * @param Postdirekt_Addressfactory_Model_Analysis_Result $analysisResult
@@ -99,10 +97,9 @@ class Postdirekt_Addressfactory_Model_Order_Updater
     ): bool {
         $wasUpdated = $this->addressUpdater->update($analysisResult, $order->getShippingAddress());
         if ($wasUpdated) {
-            $this->statusUpdater->setStatusAddressCorrected((int)$order->getEntityId());
+            $this->statusUpdater->setStatusAddressCorrected((int) $order->getId());
         }
 
         return $wasUpdated;
     }
-
 }

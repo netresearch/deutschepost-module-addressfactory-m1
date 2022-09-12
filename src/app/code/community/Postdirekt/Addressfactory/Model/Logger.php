@@ -4,6 +4,8 @@
  * See LICENSE.md for license details.
  */
 
+declare(strict_types=1);
+
 use Psr\Log\AbstractLogger;
 use Psr\Log\LogLevel;
 

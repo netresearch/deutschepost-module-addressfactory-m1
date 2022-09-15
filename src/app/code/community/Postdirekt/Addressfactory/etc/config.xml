@@ -69,6 +69,15 @@
         </routers>
     </admin>
     <adminhtml>
+        <translate>
+            <modules>
+                <Postdirekt_Addressfactory>
+                    <files>
+                        <default>Postdirekt_Addressfactory.csv</default>
+                    </files>
+                </Postdirekt_Addressfactory>
+            </modules>
+        </translate>
         <layout>
             <updates>
                 <postdirekt_addressfactory>

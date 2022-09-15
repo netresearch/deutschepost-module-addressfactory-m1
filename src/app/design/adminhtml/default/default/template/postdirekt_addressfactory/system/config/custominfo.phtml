@@ -11,17 +11,22 @@
         <div class="row">
             <div class="col content">
                 <p>
-                    <?php echo $this->escapeHtml(
-                        $this->__(
-                        // @codingStandardsIgnoreLine
-                            'some text here'
-                        )
-                    ); ?>
+                    <?php echo $this->escapeHtml($this->__('ADDRESSFACTORY DIRECT is a service of Deutsche Post Direkt for validating address data.')); ?>
+                </>
+                <p>
+                    <?php echo $this->escapeHtml($this->__('This module integrates ADDRESSFACTORY DIRECT services into Magento so that you can check the customer’s shipping address before fulfilling the order.')); ?>
+                    <?php echo $this->escapeHtml($this->__('Address validation can be performed either manually or automatically after the order was placed.'));?>
+                    <?php echo $this->escapeHtml($this->__('The address will be checked with regards to the format of the address (zipcode, street and city) as well as the probability of a successful delivery to the person at this address.'));?>
                 </p>
-                <p><strong><?php echo $this->escapeHtml($this->__('To get started:')); ?></strong><br>
+                <p>
+                    <?php echo $this->escapeHtml($this->__('Basis for this check is the postal reference file from Deutsche Post Direkt.'));?>
+                    <?php echo $this->escapeHtml($this->__('This database is unique in Germany with around 210 million current and former private addresses for validating purposes.'));?>
+                </p>
+                <p>
+                    <strong><?php echo $this->escapeHtml($this->__('To get started:')) ?></strong><br>
                     <?php echo /** @noEscape */ $this->__(
                     // @codingStandardsIgnoreLine
-                        'some text here',
+                        'You need a valid Deutsche Post Direkt account. If you do not have an account yet or your account is not enabled for ADDRESSFACTORY DIRECT, please use the <a href="%s" target="_blank">Deutsche Post Direkt</a> website to use our address solutions.',
                         $this->escapeHtml('https://www.postdirekt.de/addressfactory')
                     );?>
                 </p>

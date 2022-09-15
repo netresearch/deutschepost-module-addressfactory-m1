@@ -5,7 +5,8 @@ src/app/etc/modules/Postdirekt_Addressfactory.xml app/etc/modules/Postdirekt_Add
 src/app/design/adminhtml/default/default/layout/postdirekt_addressfactory.xml app/design/adminhtml/default/default/layout/postdirekt_addressfactory.xml
 src/app/design/adminhtml/default/default/template/postdirekt_addressfactory/ app/design/adminhtml/default/default/template/postdirekt_addressfactory/
 
-
+src/app/locale/de_DE/Postdirekt_Addressfactory.csv app/locale/de_DE/Postdirekt_Addressfactory.csv
+src/app/locale/en_US/Postdirekt_Addressfactory.csv app/locale/en_US/Postdirekt_Addressfactory.csv
 
 src/skin/adminhtml/default/default/postdirekt_addressfactory.css skin/adminhtml/default/default/postdirekt_addressfactory.css
 src/skin/adminhtml/default/default/images/postdirekt_addressfactory/ skin/adminhtml/default/default/images/postdirekt_addressfactory/

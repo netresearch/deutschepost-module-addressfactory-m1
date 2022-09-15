@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 class Postdirekt_Addressfactory_Model_Config
 {
-    const CONFIG_XML_FIELD_ENABLED = 'customer/postdirekt_addressfactory/active';
     const CONFIG_XML_FIELD_API_USER = 'customer/postdirekt_addressfactory/api_user';
     const CONFIG_XML_FIELD_API_PASSWORD = 'customer/postdirekt_addressfactory/api_password';
     const CONFIG_XML_FIELD_CONFIGURATION_NAME = 'customer/postdirekt_addressfactory/configuration_name';
@@ -20,11 +19,6 @@ class Postdirekt_Addressfactory_Model_Config
     const CONFIG_XML_FIELD_AUTO_UPDATE_SHIPPING_ADDRESS = 'customer/postdirekt_addressfactory/auto_update_shipping_address';
     const CONFIG_XML_FIELD_AUTOMATIC_ADDRESS_ANALYSIS = 'customer/postdirekt_addressfactory/automatic_address_analysis';
     const CONFIG_XML_FIELD_AUTO_VALIDATE_MANUAL_EDITED = 'customer/postdirekt_addressfactory/auto_validate_manual_edited';
-
-    public function isActive($store = null): bool
-    {
-        return Mage::getStoreConfigFlag(self::CONFIG_XML_FIELD_ENABLED, $store);
-    }
 
     public function getApiUser($store = null): string
     {

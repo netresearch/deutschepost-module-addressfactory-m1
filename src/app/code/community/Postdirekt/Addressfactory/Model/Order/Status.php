@@ -38,8 +38,8 @@ class Postdirekt_Addressfactory_Model_Order_Status
             self::POSSIBLY_DELIVERABLE => $this->translator->__('Possibly Deliverable'),
             self::DELIVERABLE => $this->translator->__('Deliverable'),
             self::ADDRESS_CORRECTED => $this->translator->__('Address Corrected'),
+            self::MANUALLY_EDITED => $this->translator->__('Address Manually Edited'),
             self::ANALYSIS_FAILED => $this->translator->__('Analysis Failed'),
-            self::MANUALLY_EDITED => $this->translator->__('Manually Edited'),
         ];
     }
 

@@ -44,10 +44,6 @@ class Postdirekt_Addressfactory_Model_Observer_RenderOrderGrid
                 'label' => Mage::helper('postdirekt_addressfactory/data')->__('[ADDRESSFACTORY] Check Shipping Address'),
                 'url' => $block->getUrl('adminhtml/sales_order_analysis/massAnalyze'),
             ],
-            'postdirekt_addressfactory_improve' => [
-                'label' => Mage::helper('postdirekt_addressfactory/data')->__('[ADDRESSFACTORY] Check and Autocorrect Shipping Address'),
-                'url' => $block->getUrl('adminhtml/sales_order_analysis/massUpdate'),
-            ],
         ];
 
         foreach ($itemsData as $itemId => $itemData) {

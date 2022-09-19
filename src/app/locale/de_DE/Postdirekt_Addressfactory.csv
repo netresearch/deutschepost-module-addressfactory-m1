@@ -1,5 +1,4 @@
 "[ADDRESSFACTORY] Check Shipping Address","[ADDRESSFACTORY] Versandaddresse prüfen"
-"[ADDRESSFACTORY] Check and Autocorrect Shipping Address","[ADDRESSFACTORY] Versandaddresse prüfen & autom. korrigieren"
 "ADDRESSFACTORY DIRECT is a service of Deutsche Post Direkt for validating address data.","ADDRESSFACTORY DIRECT ist ein Service von Deutsche Post Direkt zur Validierung von Adressdaten."
 "Address Corrected","Adresse korrigiert"
 "Address Information","Adress-Informationen"
@@ -71,7 +70,6 @@
 "Only use the option ""Analysis on order placement"" if problems occur in connection with ""Analysis via Cron"".","Nutzen Sie die Option ""Analyse bei Bestellungsabschluss"" nur, falls im Zusammenhang mit ""Analyse via Cron"" Probleme auftreten."
 "Order address updated with ADDRESSFACTORY DIRECT suggestion.","Bestelladdresse mit ADDRESSFACTORY DIRECT-Vorschlag aktualisiert."
 "Order(s) %s could not be analysed with ADDRESSFACTORY DIRECT.","Bestellung(en) %s konnten nicht mit ADDRESSFACTORY DIRECT analysiert werden."
-"Order(s) %s could not be updated.","Bestellung(en) %s konnten nicht aktualisiert werden."
 "Order(s) %s were successfully updated.","Bestellung(en) %s wurden erfolgreich aktualisiert."
 "Other Actions","Weitere Aktionen"
 "Pending","Ausstehend"

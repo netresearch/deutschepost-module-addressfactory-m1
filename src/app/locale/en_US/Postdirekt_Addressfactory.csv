@@ -1,5 +1,4 @@
 "[ADDRESSFACTORY] Check Shipping Address","[ADDRESSFACTORY] Check Shipping Address"
-"[ADDRESSFACTORY] Check and Autocorrect Shipping Address","[ADDRESSFACTORY] Check and Autocorrect Shipping Address"
 "ADDRESSFACTORY DIRECT is a service of Deutsche Post Direkt for validating address data.","ADDRESSFACTORY DIRECT is a service of Deutsche Post Direkt for validating address data."
 "Address Corrected","Address Corrected"
 "Address Information","Address Information"
@@ -71,7 +70,6 @@
 "Only use the option ""Analysis on order placement"" if problems occur in connection with ""Analysis via Cron"".","Only use the option ""Analysis on order placement"" if problems occur in connection with ""Analysis via Cron""."
 "Order address updated with ADDRESSFACTORY DIRECT suggestion.","Order address updated with ADDRESSFACTORY DIRECT suggestion."
 "Order(s) %s could not be analysed with ADDRESSFACTORY DIRECT.","Order(s) %s could not be analysed with ADDRESSFACTORY DIRECT."
-"Order(s) %s could not be updated.","Order(s) %s could not be updated."
 "Order(s) %s were successfully updated.","Order(s) %s were successfully updated."
 "Other Actions","Other Actions"
 "Pending","Pending"

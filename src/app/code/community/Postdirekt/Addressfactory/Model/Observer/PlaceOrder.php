@@ -93,12 +93,12 @@ class Postdirekt_Addressfactory_Model_Observer_PlaceOrder
                 $this->orderUpdater->cancelIfUndeliverable($order, $analysisResult);
             }
 
-            if ($this->config->isHoldNonDeliverableOrders()) {
-                $this->orderUpdater->holdIfNonDeliverable($order, $analysisResult);
-            }
-
             if ($this->config->isAutoUpdateShippingAddress()) {
                 $this->orderUpdater->updateShippingAddress($order, $analysisResult);
+            }
+
+            if ($this->config->isHoldNonDeliverableOrders()) {
+                $this->orderUpdater->holdIfNonDeliverable($order, $analysisResult);
             }
         }
     }

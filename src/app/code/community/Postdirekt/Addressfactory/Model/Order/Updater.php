@@ -44,8 +44,18 @@ class Postdirekt_Addressfactory_Model_Order_Updater
         if (!$order->canHold()) {
             return false;
         }
+
         $score = $this->deliverabilityCodes->computeScore($analysisResult->getStatusCodes());
+        $status = $this->statusUpdater->getStatus((int) $order->getId());
+        if (($score == DeliverabilityCodes::CORRECTION_REQUIRED)
+            && ($status === Postdirekt_Addressfactory_Model_Order_Status::ADDRESS_CORRECTED)
+        ) {
+            // address needed correction and was corrected already - no hold
+            return false;
+        }
+
         if ($score === DeliverabilityCodes::DELIVERABLE) {
+            // address is deliverable, don't hold the order
             return false;
         }
 

@@ -1,7 +1,8 @@
 # Module Addressfactory M1
 
-The module Addressfactory for Magento 2 allows you to automatically analyze and correct shipping addresses
-in your shop system using the service of Deutsche Post Direkt.
+The module Addressfactory for Magento 1 allows you to automatically
+analyze and correct shipping addresses in your shop system using
+the service of Deutsche Post Direkt.
 
 ## Requirements
 
@@ -13,9 +14,33 @@ in your shop system using the service of Deutsche Post Direkt.
 
 ## Installation Instructions
 
-Install sources:
+Deutsche Post Direkt ADDRESSFACTORY for Magento 1 is a
+[Composer](https://getcomposer.org) package. In order to use the extension,
+you need a project that can install `magento-module` packages, for example
+[OpenMage](https://www.openmage.org/) with the
+`magento-hackathon/magento-composer-installer` package.
 
-    composer require deutschepost/module-addressfactory-m1
+1. Install the module files using Composer:
+   
+   `composer require deutschepost/module-addressfactory-m1`
+
+2. Set up the database tables: clear the cache, log out from the admin panel
+   and then log in again.
+
+## Uninstallation Instructions
+
+1. To remove the database tables, execute the following commands:
+ 
+   ```sql
+   DROP TABLE postdirekt_addressfactory_analysis_status;
+   DROP TABLE postdirekt_addressfactory_analysis_result;
+   DELETE FROM core_config_data WHERE path LIKE 'customer/postdirekt_addressfactory/%';
+   DELETE FROM core_resource WHERE code = 'postdirekt_addressfactory_setup';
+   ```
+
+2. Remove the module files using Composer:
+
+   `composer remove deutschepost/module-addressfactory-m1`
 
 ## Support
 

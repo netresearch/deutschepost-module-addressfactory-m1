@@ -95,6 +95,13 @@ class Postdirekt_Addressfactory_Model_Cron_AutoProcess
                 }
             }
 
+            if ($this->config->isAutoUpdateShippingAddress()) {
+                $isUpdated = $this->orderUpdater->updateShippingAddress($order, $analysisResult);
+                if ($isUpdated) {
+                    $updatedOrderIds[] = $order->getIncrementId();
+                }
+            }
+
             if ($this->config->isHoldNonDeliverableOrders()) {
                 $isOnHold = $this->orderUpdater->holdIfNonDeliverable($order, $analysisResult);
                 if ($isOnHold) {
@@ -102,12 +109,6 @@ class Postdirekt_Addressfactory_Model_Cron_AutoProcess
                 }
             }
 
-            if ($this->config->isAutoUpdateShippingAddress()) {
-                $isUpdated = $this->orderUpdater->updateShippingAddress($order, $analysisResult);
-                if ($isUpdated) {
-                    $updatedOrderIds[] = $order->getIncrementId();
-                }
-            }
         }
 
         $cronMessages = [];

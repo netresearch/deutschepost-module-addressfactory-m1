@@ -122,7 +122,7 @@ class Postdirekt_Addressfactory_Model_Service_AddressAnalysis
             );
         } catch (ServiceException $exception) {
             throw new \RuntimeException(
-                $this->dataHelper->__('Service exception: %1', $exception->getMessage()),
+                $this->dataHelper->__('Service exception: %s', $exception->getMessage()),
                 $exception->getCode(),
                 $exception
             );

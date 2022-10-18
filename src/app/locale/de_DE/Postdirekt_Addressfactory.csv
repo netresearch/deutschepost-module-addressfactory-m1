@@ -80,7 +80,7 @@
 "receiver deceased","Empfänger verstorben"
 "reportedly deceased","Empfänger soll verstorben sein"
 "Reset analysis result to allow re-validation of manually edited addresses.","Analyse-Ergebnis nach dem manuellen Bearbeiten einer Adresse zurücksetzen, um eine erneute Prüfung durchführen zu können."
-"Service exception: %1","Schnittstellen-Fehler: %1"
+"Service exception: %s","Schnittstellen-Fehler: %s"
 "Shipping Address Check","Versandadressen-Prüfung"
 "Shipping Address Deliverable","Versandadresse zustellbar"
 "Shipping Address Possibly Deliverable","Versandadresse eventuell zustellbar"

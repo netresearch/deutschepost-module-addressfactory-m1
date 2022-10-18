@@ -80,7 +80,7 @@
 "receiver deceased","receiver deceased"
 "reportedly deceased","reportedly deceased"
 "Reset analysis result to allow re-validation of manually edited addresses.","Reset analysis result to allow re-validation of manually edited addresses."
-"Service exception: %1","Service exception: %1"
+"Service exception: %s","Service exception: %s"
 "Shipping Address Check","Shipping Address Check"
 "Shipping Address Deliverable","Shipping Address Deliverable"
 "Shipping Address Possibly Deliverable","Shipping Address Possibly Deliverable"

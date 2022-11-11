@@ -107,7 +107,12 @@ class Postdirekt_Addressfactory_Model_Order_Updater
     ): bool {
         $wasUpdated = $this->addressUpdater->update($analysisResult, $order->getShippingAddress());
         if ($wasUpdated) {
-            $this->statusUpdater->setStatusAddressCorrected((int) $order->getId());
+            if($this->statusUpdater->getStatus((int) $order->getId()) === DeliverabilityCodes::UNDELIVERABLE){
+                // if status has been undeliverable an address correction might not fix all issues with it
+                $this->statusUpdater->setStatusPossiblyDeliverable((int) $order->getId());
+            } else {
+                $this->statusUpdater->setStatusAddressCorrected((int) $order->getId());
+            }
         }
 
         return $wasUpdated;

@@ -65,24 +65,24 @@ class Postdirekt_Addressfactory_Model_Config
         return Mage::getStoreConfigFlag(self::CONFIG_XML_FIELD_AUTO_UPDATE_SHIPPING_ADDRESS);
     }
 
-    protected function getAutomaticAddressAnalysis(): string
+    protected function getAutomaticAddressAnalysis($store = null): string
     {
-        return (string) Mage::getStoreConfig(self::CONFIG_XML_FIELD_AUTOMATIC_ADDRESS_ANALYSIS);
+        return (string) Mage::getStoreConfig(self::CONFIG_XML_FIELD_AUTOMATIC_ADDRESS_ANALYSIS, $store);
     }
 
-    public function isManualAnalysisOnly(): bool
+    public function isManualAnalysisOnly($store = null): bool
     {
-        return $this->getAutomaticAddressAnalysis() === Postdirekt_Addressfactory_Model_Adminhtml_System_Config_Source_Automaticoptions::NO_AUTOMATIC_ANALYSIS;
+        return $this->getAutomaticAddressAnalysis($store) === Postdirekt_Addressfactory_Model_Adminhtml_System_Config_Source_Automaticoptions::NO_AUTOMATIC_ANALYSIS;
     }
 
-    public function isAnalysisOnOrderPlace(): bool
+    public function isAnalysisOnOrderPlace($store = null): bool
     {
-        return $this->getAutomaticAddressAnalysis() === Postdirekt_Addressfactory_Model_Adminhtml_System_Config_Source_Automaticoptions::ON_ORDER_PLACE;
+        return $this->getAutomaticAddressAnalysis($store) === Postdirekt_Addressfactory_Model_Adminhtml_System_Config_Source_Automaticoptions::ON_ORDER_PLACE;
     }
 
-    public function isAutomaticAddressAnalysis(): bool
+    public function isAutomaticAddressAnalysis($store = null): bool
     {
-        return $this->getAutomaticAddressAnalysis() === Postdirekt_Addressfactory_Model_Adminhtml_System_Config_Source_Automaticoptions::ANALYSIS_VIA_CRON;
+        return $this->getAutomaticAddressAnalysis($store) === Postdirekt_Addressfactory_Model_Adminhtml_System_Config_Source_Automaticoptions::ANALYSIS_VIA_CRON;
     }
 
     public function isAutoValidateManualEdited(): bool

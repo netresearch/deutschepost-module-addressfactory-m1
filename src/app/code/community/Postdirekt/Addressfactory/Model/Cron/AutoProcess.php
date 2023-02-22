@@ -40,9 +40,10 @@ class Postdirekt_Addressfactory_Model_Cron_AutoProcess
      * Collect all orders that apply for automatic analysis.
      *
      * @param bool $includeEdited Indicate if manually edited addresses should be included.
+     * @param int[] $storeIds
      * @return Mage_Sales_Model_Order[]
      */
-    private function loadOrders(bool $includeEdited): array
+    private function loadOrders(bool $includeEdited, array $storeIds): array
     {
         $orderCollection = Mage::getResourceModel('sales/order_collection');
         if (!$orderCollection instanceof Mage_Sales_Model_Resource_Order_Collection) {
@@ -64,12 +65,22 @@ class Postdirekt_Addressfactory_Model_Cron_AutoProcess
             ['in' => $orderStatus]
         );
 
+        $orderCollection->addFieldToFilter('store_id', ['in' => $storeIds]);
+
         return $orderCollection->getItems();
     }
 
     public function execute(Mage_Cron_Model_Schedule $schedule)
     {
-        if (!$this->config->isAutomaticAddressAnalysis()) {
+        $storeIds = array_keys(
+            Mage::getConfig()
+                ->getStoresConfigByPath(
+                    Postdirekt_Addressfactory_Model_Config::CONFIG_XML_FIELD_AUTOMATIC_ADDRESS_ANALYSIS,
+                    [Postdirekt_Addressfactory_Model_Adminhtml_System_Config_Source_Automaticoptions::ANALYSIS_VIA_CRON]
+                )
+        );
+
+        if (empty($storeIds)) {
             return;
         }
 
@@ -78,7 +89,7 @@ class Postdirekt_Addressfactory_Model_Cron_AutoProcess
         $failedOrderIds = [];
         $updatedOrderIds = [];
 
-        $orders = $this->loadOrders($this->config->isAutoValidateManualEdited());
+        $orders = $this->loadOrders($this->config->isAutoValidateManualEdited(), $storeIds);
         $analysisResults = $this->orderAnalysis->analyse($orders);
 
         foreach ($orders as $order) {
@@ -108,7 +119,6 @@ class Postdirekt_Addressfactory_Model_Cron_AutoProcess
                     $heldOrderIds[] = $order->getIncrementId();
                 }
             }
-
         }
 
         $cronMessages = [];

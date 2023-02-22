@@ -60,8 +60,9 @@ class Postdirekt_Addressfactory_Model_Observer_PlaceOrder
         }
 
         $orderId = (int) $order->getId();
+        $storeId = $order->getStoreId();
 
-        if ($this->config->isManualAnalysisOnly()) {
+        if ($this->config->isManualAnalysisOnly($storeId)) {
             $this->statusUpdater->setStatusNotAnalyzed($orderId);
             return;
         }
@@ -73,13 +74,13 @@ class Postdirekt_Addressfactory_Model_Observer_PlaceOrder
             return;
         }
 
-        if ($this->config->isAutomaticAddressAnalysis()) {
+        if ($this->config->isAutomaticAddressAnalysis($storeId)) {
             // Pending status means the cron will pick up the order
             $this->statusUpdater->setStatusPending($orderId);
             return;
         }
 
-        if ($this->config->isAnalysisOnOrderPlace()) {
+        if ($this->config->isAnalysisOnOrderPlace($storeId)) {
             $analysisResults = $this->orderAnalysis->analyse([$order]);
             $analysisResult = $analysisResults[$orderId];
             if (!$analysisResult) {
